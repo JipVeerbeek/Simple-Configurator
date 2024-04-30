@@ -5,7 +5,9 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
-        return str(self.id)
+        id = str(self.id)
+        name = str(self.name)
+        return f"Product: {name} ({id})"
     
 
 class ProductQuestion(models.Model):
@@ -13,7 +15,8 @@ class ProductQuestion(models.Model):
     question_id = models.ForeignKey('questions.Question', on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.id)
+        id = str(self.id)
+        return f"ProductQuestion: ({id})"
 
 
 class ProductQuestionArticle(models.Model):
@@ -22,4 +25,5 @@ class ProductQuestionArticle(models.Model):
     price = models.IntegerField()
 
     def __str__(self):
-        return str(self.id)
+        id = str(self.id)
+        return f"ProductQuestionArticle: ({id})"

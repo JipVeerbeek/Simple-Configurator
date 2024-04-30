@@ -7,7 +7,8 @@ class Configuration(models.Model):
     status = models.CharField(max_length=100, default='draft')
 
     def __str__(self):
-        return str(self.id)
+        id = str(self.id)
+        return f"Configuration: ({id})"
 
 
 class ConfigurationLine(models.Model):
@@ -27,4 +28,5 @@ class Adress(models.Model):
         verbose_name_plural = "Adresses"
 
     def __str__(self):
-        return str(self.id)
+        id = str(self.id)
+        return f"Adress: ({id})"
