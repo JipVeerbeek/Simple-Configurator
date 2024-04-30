@@ -8,7 +8,7 @@ class Product(models.Model):
         return str(self.id)
     
 
-class Product_question(models.Model):
+class ProductQuestion(models.Model):
     product_id = models.ForeignKey('Product', on_delete=models.CASCADE)
     question_id = models.ForeignKey('questions.Question', on_delete=models.CASCADE)
 
@@ -16,8 +16,8 @@ class Product_question(models.Model):
         return str(self.id)
 
 
-class Product_question_article(models.Model):
-    product_question_id = models.ForeignKey('Product_question', on_delete=models.CASCADE)
+class ProductQuestionArticle(models.Model):
+    product_question_id = models.ForeignKey('ProductQuestion', on_delete=models.CASCADE)
     article_id = models.ForeignKey('articles.Article', on_delete=models.CASCADE)
     price = models.IntegerField()
 
