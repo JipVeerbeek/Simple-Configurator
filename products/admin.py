@@ -9,8 +9,10 @@ class ProductAdmin(admin.ModelAdmin):
 class ProductQuestionAdmin(admin.ModelAdmin):
     list_display = ["id", "product_id", "question_id"]
 
+
 class ProductQuestionArticleAdmin(admin.ModelAdmin):
     list_display = ["id", "product_question_id", "article_id", "price"]
+
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Product_question, ProductQuestionAdmin)
