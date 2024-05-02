@@ -25,6 +25,6 @@ class Configuration(models.Model):
         return str(self.id)
 
 
-class Configuration_line(models.Model):
-    product_question_article_id = models.ForeignKey('products.Product_question_article', on_delete=models.CASCADE)
+class ConfigurationLine(models.Model):
+    product_question_article_id = models.ForeignKey('products.ProductQuestionArticle', on_delete=models.CASCADE)
     configuration_id = models.ForeignKey('Configuration', on_delete=models.CASCADE)

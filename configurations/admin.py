@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Configuration, Adress, Configuration_line
+from .models import Configuration, Adress, ConfigurationLine
 
 
 class AdressAdmin(admin.ModelAdmin):
@@ -16,4 +16,4 @@ class ConfigurationLineAdmin(admin.ModelAdmin):
 
 admin.site.register(Adress, AdressAdmin)
 admin.site.register(Configuration, ConfigurationAdmin)
-admin.site.register(Configuration_line, ConfigurationLineAdmin)
+admin.site.register(ConfigurationLine, ConfigurationLineAdmin)
