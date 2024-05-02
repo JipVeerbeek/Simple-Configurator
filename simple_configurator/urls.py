@@ -24,10 +24,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Django Sample Application API",
         default_version='v1',
-        description="Welcome to the Django Sample Application API documentation",
     ),
-    public=True,
-    permission_classes=(permissions.AllowAny,),
 )
 
 
