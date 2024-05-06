@@ -5,6 +5,7 @@ charset-normalizer==3.3.2
 coreapi==2.3.3
 coreschema==0.0.4
 Django==5.0.4
+django-dynamic-fixtures==0.2.1
 django-rest-swagger==2.2.0
 djangorestframework==3.15.1
 drf-yasg==1.21.7
