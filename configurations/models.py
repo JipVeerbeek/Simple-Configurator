@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Configuration(models.Model):
-    adress_id = models.ForeignKey('Adress', on_delete=models.CASCADE)
     product_id = models.ForeignKey('products.Product', on_delete=models.CASCADE)
+    adress_id = models.ForeignKey('Adress', on_delete=models.CASCADE, blank=True)
     status = models.CharField(max_length=100, default='draft')
 
     def __str__(self):
