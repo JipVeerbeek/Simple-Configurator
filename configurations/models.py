@@ -3,7 +3,7 @@ from django.db import models
 
 class Configuration(models.Model):
     product_id = models.ForeignKey('products.Product', on_delete=models.CASCADE)
-    adress_id = models.ForeignKey('Adress', on_delete=models.CASCADE, blank=True)
+    adress_id = models.ForeignKey('Adress', on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(max_length=100, default='draft')
 
     def __str__(self):
