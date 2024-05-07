@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/', include([
         path('swagger/', schema_view.with_ui('swagger', cache_timeout=0)),
         path('product/', include('products.urls')),
+        path('question/', include('questions.urls')),
         path('configuration/', include('configurations.urls')),
     ]))
 
