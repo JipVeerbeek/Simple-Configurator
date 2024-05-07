@@ -1,3 +1,16 @@
-from django.test import TestCase
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
+from products.models import Product
 
-# Create your tests here.
+class ProductTests(APITestCase):
+    def test_get_product(self):
+        url = reverse('ProductListView')
+        Product.objects.create(name='Product 1')
+        Product.objects.create(name='Product 2')
+        
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Product.objects.count(), 2)
+        self.assertEqual(response.data[0]['name'], 'Product 1')
+        self.assertEqual(response.data[1]['name'], 'Product 2')
