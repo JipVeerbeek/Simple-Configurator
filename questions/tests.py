@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from products.models import Product, ProductQuestion, ProductQuestionArticle
+from products.models import Product, ProductQuestion
 from .models import Question
 
 
