@@ -6,7 +6,7 @@ from products.models import Product
 
 
 class ConfigurationTests(APITestCase):
-    def test_get_Configuration(self):
+    def test_get_configuration(self):
         url = reverse('ConfigurationCreateView')
         product = Product.objects.create(name='Product')
         address1 = Address.objects.create(first_name='fname', last_name='lname', address='address', city="city", postal_code='0000AA')
