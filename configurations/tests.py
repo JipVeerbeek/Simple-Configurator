@@ -9,8 +9,8 @@ class ConfigurationTests(APITestCase):
     def test_get_configuration(self):
         url = reverse('ConfigurationCreateView')
         product = Product.objects.create(name='Product')
-        address1 = Address.objects.create(first_name='fname', last_name='lname', address='address', city="city", postal_code='0000AA')
-        address2 = Address.objects.create(first_name='fname', middle_name='mname', last_name='lname', address='address', city="city", postal_code='0000AA')
+        address1 = Address.objects.create(first_name='fname', last_name='lname', address='address', city="city")
+        address2 = Address.objects.create(first_name='fname', middle_name='mname', last_name='lname', address='address', city="city")
 
         data1 = {'product_id': product.id, 'address_id': address1.id}
         data2 = {'product_id': product.id, 'address_id': address2.id}
