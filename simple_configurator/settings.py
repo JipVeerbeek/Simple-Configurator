@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_swagger',
+    'dynamic_fixtures',
     'drf_yasg',
     'products',
     'questions',

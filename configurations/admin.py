@@ -11,7 +11,7 @@ class ConfigurationLineAdmin(admin.ModelAdmin):
 
 
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ["id", "first_name", "middle_name", "last_name", "address", "city", "postal_code"]
+    list_display = ["id", "first_name", "middle_name", "last_name", "address", "city"]
 
 
 admin.site.register(Configuration, ConfigurationAdmin)
