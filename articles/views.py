@@ -3,6 +3,7 @@ from .models import Article
 from products.models import ProductQuestion, ProductQuestionArticle
 from .serializers import ArticleSerializer
 from products.serializers import ProductQuestionSerializer, ProductQuestionArticleSerializer
+from configurations.models import Configuration
 
 
 class ArticleListView(generics.ListAPIView):
@@ -10,11 +11,15 @@ class ArticleListView(generics.ListAPIView):
 
     def get_queryset(self):
         #haalt ids op uit url
-        product_id = self.kwargs.get('product_id')
+        configuration_id = self.kwargs.get('configuration_id')
         question_id = self.kwargs.get('question_id')
 
+        #product id uit configuration ophalen
+        product = Configuration.objects.get(product_id=configuration_id)
+        product_question = ProductQuestion.objects.filter(product_id=product.id)
+
         #haalt product question op waar je de articles van gaat krijgen
-        product_question = ProductQuestion.objects.get(product_id=product_id, question_id=question_id)
+        product_question = ProductQuestion.objects.get(product_id=product.id, question_id=question_id)
         #serialize
         product_question_serializer = ProductQuestionSerializer(product_question)
         #pakt prod question id

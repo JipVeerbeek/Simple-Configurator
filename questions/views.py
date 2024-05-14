@@ -3,15 +3,17 @@ from .models import Question
 from products.models import ProductQuestion
 from .serializers import QuestionSerializer
 from products.serializers import ProductQuestionSerializer
+from configurations.models import Configuration
 
 
 class QuestionListView(generics.ListAPIView):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
-        product_id = self.kwargs.get('product_id')
+        configuration_id = self.kwargs.get('configuration_id')
+        product = Configuration.objects.get(product_id=configuration_id)
 
-        product_question = ProductQuestion.objects.filter(product_id=product_id)
+        product_question = ProductQuestion.objects.filter(product_id=product.id)
         serializer = ProductQuestionSerializer(product_question, many=True)
 
         queryset = []
