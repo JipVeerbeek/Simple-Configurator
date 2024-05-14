@@ -24,4 +24,4 @@ class ProductQuestionArticleFactory(factory.django.DjangoModelFactory):
 
     product_question_id = factory.SubFactory(ProductQuestionFactory)
     article_id = factory.SubFactory(ArticleFactory)
-    price = factory.Faker('random_int', min=0, max=1000)
+    price = factory.Faker('random_int', min=0, max=99)
