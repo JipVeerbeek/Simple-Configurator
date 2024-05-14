@@ -4,14 +4,16 @@ from rest_framework.test import APITestCase
 from products.models import Product, ProductQuestion, ProductQuestionArticle
 from questions.models import Question
 from .models import Article
+from configurations.models import Configuration
 
 
 class ArticleTests(APITestCase):
     def test_get_articles(self):
         product = Product.objects.create(name='Product')
+        configuration = Configuration.objects.create(product_id=product)
         question = Question.objects.create(name='Question')
         second_question = Question.objects.create(name='Question2')
-        url = reverse('ArticleListView', kwargs={'product_id': product.id, 'question_id': question.id})
+        url = reverse('ArticleListView', kwargs={'configuration_id': configuration.id, 'question_id': question.id})
 
         product_question = ProductQuestion.objects.create(product_id=product, question_id=question)
         second_product_question = ProductQuestion.objects.create(product_id=product, question_id=second_question)

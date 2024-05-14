@@ -3,23 +3,20 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from products.models import Product, ProductQuestion
 from .models import Question
-
+from configurations.models import Configuration
 
 class ArticleTests(APITestCase):
     def test_get_articles(self):
 
         product = Product.objects.create(name='Product')
-        second_product = Product.objects.create(name='Product2')
-
+        configuration = Configuration.objects.create(product_id=product)
         question = Question.objects.create(name='Question')
         second_question = Question.objects.create(name='Question2')
-        third_question = Question.objects.create(name='Question3')
         
-        url = reverse('QuestionListView', kwargs={'product_id': product.id})
+        url = reverse('QuestionListView', kwargs={'configuration_id': configuration.id})
 
         ProductQuestion.objects.create(product_id=product, question_id=question)
         ProductQuestion.objects.create(product_id=product, question_id=second_question)
-        ProductQuestion.objects.create(product_id=second_product, question_id=third_question)
  
         response = self.client.get(url)
  
