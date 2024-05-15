@@ -1,6 +1,6 @@
 from .models import ConfigurationLine
-from .serializers import ConfigurationLineSerializer
 from products.models import ProductQuestionArticle
+from rest_framework.response import Response
 
 
 class PriceService:
@@ -12,12 +12,10 @@ class PriceService:
     
     def calculateOrderPrice(self):
         lines = self.getOrderLines()
-
-        serialized_lines = ConfigurationLineSerializer(lines, many=True)
         price = 0
 
-        for line in serialized_lines.data:
-            product_question_article = ProductQuestionArticle.objects.get(id=line['product_question_article_id'])
+        for line in lines:
+            product_question_article = ProductQuestionArticle.objects.get(id=line.product_question_article_id.id)
             price = price + product_question_article.price
 
-        return price
+        return Response(price)

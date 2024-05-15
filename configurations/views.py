@@ -1,6 +1,6 @@
-from rest_framework import generics
+from rest_framework import generics, views
 from .models import Configuration, ConfigurationLine
-from .serializers import ConfigurationSerializer, ConfigurationLineSerializer, PriceSerializer
+from .serializers import ConfigurationSerializer, ConfigurationLineSerializer
 from .services import PriceService
 
 
@@ -14,12 +14,7 @@ class AnswerCreateView(generics.CreateAPIView):
     queryset = ConfigurationLine.objects.all()
 
 
-class PriceListView(generics.ListAPIView):
-    serializer_class = PriceSerializer
-
-    def get_queryset(self):
-        configuration_id = self.kwargs.get('configuration_id')
-
+class PriceListView(views.APIView):
+    def get(self, request, configuration_id, *args, **kwargs):
         new_price = PriceService(configuration=configuration_id).calculateOrderPrice()
-
-        return [{'price': new_price}]
+        return new_price
