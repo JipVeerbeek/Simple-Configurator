@@ -14,12 +14,11 @@ class ArticleListView(generics.ListAPIView):
         configuration_id = self.kwargs.get('configuration_id')
         question_id = self.kwargs.get('question_id')
 
-        #product id uit configuration ophalen
-        product = Configuration.objects.get(product_id=configuration_id)
-        product_question = ProductQuestion.objects.filter(product_id=product.id)
+        #configuration ophalen
+        configuration = Configuration.objects.get(id=configuration_id)
 
         #haalt product question op waar je de articles van gaat krijgen
-        product_question = ProductQuestion.objects.get(product_id=product.id, question_id=question_id)
+        product_question = ProductQuestion.objects.get(product_id=configuration.product_id, question_id=question_id)
         #serialize
         product_question_serializer = ProductQuestionSerializer(product_question)
         #pakt prod question id

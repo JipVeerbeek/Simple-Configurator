@@ -11,9 +11,9 @@ class QuestionListView(generics.ListAPIView):
 
     def get_queryset(self):
         configuration_id = self.kwargs.get('configuration_id')
-        product = Configuration.objects.get(product_id=configuration_id)
+        configuration = Configuration.objects.get(id=configuration_id)
 
-        product_question = ProductQuestion.objects.filter(product_id=product.id)
+        product_question = ProductQuestion.objects.filter(product_id=configuration.product_id)
         serializer = ProductQuestionSerializer(product_question, many=True)
 
         queryset = []
