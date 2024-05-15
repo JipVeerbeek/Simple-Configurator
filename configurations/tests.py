@@ -63,6 +63,6 @@ class ConfigurationTests(APITestCase):
         url = reverse('PriceListView', kwargs={'configuration_id': self.configuration.id})
 
         response = self.client.get(url)
-        
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data[0]['price'], 300)
+        self.assertEqual(response.data, 300)
