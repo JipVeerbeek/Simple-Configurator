@@ -8,6 +8,8 @@ from articles.models import Article
 
 
 class ConfigurationTests(APITestCase):
+
+    # todo: use factories
     def setUp(self):
         self.product = Product.objects.create(name='Product')
         self.configuration = Configuration.objects.create(product_id=self.product)
@@ -28,8 +30,9 @@ class ConfigurationTests(APITestCase):
 
 
     def test_create_configuration(self):
+        # todo: rewrite to factories with create_batch()
         url = reverse('ConfigurationCreateView')
-        
+
         data1 = {'product_id': self.product.id, 'address_id': self.address1.id}
         data2 = {'product_id': self.product.id, 'address_id': self.address2.id}
         data3 = {'product_id': self.product.id}
@@ -46,7 +49,9 @@ class ConfigurationTests(APITestCase):
 
     def test_create_configuration_line_answer(self):
         url = reverse('AnswerCreateView')
-        
+
+        # todo: if you don't test a quantity response result, then just testing a
+        #       single create action is sufficient
         data1 = {'product_question_article_id': self.product_question_article1.id, 'configuration_id': self.configuration.id}
         data2 = {'product_question_article_id': self.product_question_article2.id, 'configuration_id': self.configuration.id}
         data3 = {'product_question_article_id': self.product_question_article3.id, 'configuration_id': self.configuration.id}

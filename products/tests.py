@@ -5,6 +5,10 @@ from products.models import Product
 from products.serializers import ProductSerializer
 
 
+# Todo: You are mixing serializer and API-view tests. Better to separate hem
+#       in their own test-case class:
+#       - ProductListViewTestCase
+#       - ProductSerializerTestCase
 class ProductTests(APITestCase):
     def test_get_product(self):
         url = reverse('ProductListView')

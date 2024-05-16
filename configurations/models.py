@@ -2,6 +2,8 @@ from django.db import models
 
 
 class Configuration(models.Model):
+    # todo: just use product and address as field name (convention).
+    #       do this for all models
     product_id = models.ForeignKey('products.Product', on_delete=models.CASCADE)
     address_id = models.ForeignKey('Address', on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(max_length=100, default='draft')

@@ -16,5 +16,8 @@ class AnswerCreateView(generics.CreateAPIView):
 
 class PriceListView(views.APIView):
     def get(self, request, configuration_id, *args, **kwargs):
+        # todo: where is the old price? ;)
+        #       price_service = PriceService(..)
+        #       return price_service.calculate_order_price()
         new_price = PriceService(configuration=configuration_id).calculateOrderPrice()
         return new_price

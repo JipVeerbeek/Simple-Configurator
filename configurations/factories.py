@@ -18,6 +18,7 @@ class ConfigurationFactory(factory.django.DjangoModelFactory):
 class ConfigurationLineFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.ConfigurationLine
+        # todo: django_get_or_create on both fields
 
     product_question_article_id = factory.SubFactory(factories.ProductQuestionArticleFactory)
     configuration_id = factory.SubFactory(ConfigurationFactory)
@@ -26,6 +27,7 @@ class ConfigurationLineFactory(factory.django.DjangoModelFactory):
 class AddressFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Address
+        # todo: django_get_or_create on first, middle and address
 
     first_name = factory.Faker('first_name')
     middle_name = factory.LazyAttribute(lambda o: fake.name() if fake.boolean() else None)
