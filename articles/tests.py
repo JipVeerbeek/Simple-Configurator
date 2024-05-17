@@ -8,15 +8,6 @@ from products.factories import ProductFactory, ProductQuestionFactory, ProductQu
 
 class ArticleTests(APITestCase):
     def test_get_articles(self):
-        # ConfigurationLineFactory.create_batch(3)
-
-        # todo: Use your factories
-        #       ProductFactory()
-        #       this allows you to automatically create a lot of the related objects.
-
-        # todo: Lines are a little long. Can you configure your IDE to use max length
-        #       120 line length and apply it throughout your code? Very useful for split
-        #       screen.
         product = ProductFactory()
         question = QuestionFactory()
         product_question = ProductQuestionFactory(
@@ -39,3 +30,7 @@ class ArticleTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
+
+        # todo: Lines are a little long. Can you configure your IDE to use max length
+        #       120 line length and apply it throughout your code? Very useful for split
+        #       screen.

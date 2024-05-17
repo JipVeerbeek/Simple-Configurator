@@ -19,5 +19,5 @@ class PriceListView(views.APIView):
         # todo: where is the old price? ;)
         #       price_service = PriceService(..)
         #       return price_service.calculate_order_price()
-        new_price = PriceService(configuration=configuration_id).calculateOrderPrice()
+        new_price = PriceService(configuration=configuration_id).calculate_order_price()
         return new_price

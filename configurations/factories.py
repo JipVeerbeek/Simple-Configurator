@@ -3,6 +3,7 @@ from . import models
 from faker import Faker
 from products import factories
 
+
 fake = Faker()
 
 
@@ -18,7 +19,7 @@ class ConfigurationFactory(factory.django.DjangoModelFactory):
 class ConfigurationLineFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.ConfigurationLine
-        # todo: django_get_or_create on both fields
+        django_get_or_create = ['product_question_article_id', 'configuration_id']
 
     product_question_article_id = factory.SubFactory(factories.ProductQuestionArticleFactory)
     configuration_id = factory.SubFactory(ConfigurationFactory)
@@ -27,7 +28,7 @@ class ConfigurationLineFactory(factory.django.DjangoModelFactory):
 class AddressFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Address
-        # todo: django_get_or_create on first, middle and address
+        django_get_or_create = ['first_name', 'middle_name', 'address']
 
     first_name = factory.Faker('first_name')
     middle_name = factory.LazyAttribute(lambda o: fake.name() if fake.boolean() else None)

@@ -22,12 +22,11 @@ class PriceService:
     def __init__(self, configuration):
         self.configuration = configuration
 
-    # todo: naming convention for methods is snake_cased_method_names
-    def getOrderLines(self):
+    def get_order_lines(self):
         return ConfigurationLine.objects.filter(configuration_id=self.configuration)
     
-    def calculateOrderPrice(self):
-        lines = self.getOrderLines()
+    def calculate_order_price(self):
+        lines = self.get_order_lines()
         price = 0
 
         for line in lines:
