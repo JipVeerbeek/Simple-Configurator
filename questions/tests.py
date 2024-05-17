@@ -9,14 +9,14 @@ class ArticleTests(APITestCase):
     def test_get_articles(self):
 
         product = Product.objects.create(name='Product')
-        configuration = Configuration.objects.create(product_id=product)
+        configuration = Configuration.objects.create(product=product)
         question = Question.objects.create(name='Question')
         second_question = Question.objects.create(name='Question2')
         
-        url = reverse('QuestionListView', kwargs={'configuration_id': configuration.id})
+        url = reverse('QuestionListView', kwargs={'configuration': configuration.id})
 
-        ProductQuestion.objects.create(product_id=product, question_id=question)
-        ProductQuestion.objects.create(product_id=product, question_id=second_question)
+        ProductQuestion.objects.create(product=product, question=question)
+        ProductQuestion.objects.create(product=product, question=second_question)
  
         response = self.client.get(url)
  

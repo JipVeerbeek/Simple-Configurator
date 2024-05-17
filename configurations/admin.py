@@ -3,11 +3,11 @@ from .models import Configuration, Address, ConfigurationLine
 
 
 class ConfigurationAdmin(admin.ModelAdmin):
-    list_display = ["id", "address_id", "product_id", "status"]
+    list_display = ["id", "address", "product", "status"]
 
 
 class ConfigurationLineAdmin(admin.ModelAdmin):
-    list_display = ["id", "product_question_article_id", "configuration_id"]
+    list_display = ["id", "product_question_article", "configuration"]
 
 
 class AddressAdmin(admin.ModelAdmin):

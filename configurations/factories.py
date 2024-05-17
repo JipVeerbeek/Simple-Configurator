@@ -11,18 +11,18 @@ class ConfigurationFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Configuration
 
-    product_id = factory.SubFactory(factories.ProductFactory)
-    address_id = factory.LazyAttribute(lambda o: AddressFactory() if fake.boolean() else None)
+    product = factory.SubFactory(factories.ProductFactory)
+    address = factory.LazyAttribute(lambda o: AddressFactory() if fake.boolean() else None)
     status = 'draft'
 
 
 class ConfigurationLineFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.ConfigurationLine
-        django_get_or_create = ['product_question_article_id', 'configuration_id']
+        django_get_or_create = ['product_question_article', 'configuration']
 
-    product_question_article_id = factory.SubFactory(factories.ProductQuestionArticleFactory)
-    configuration_id = factory.SubFactory(ConfigurationFactory)
+    product_question_article = factory.SubFactory(factories.ProductQuestionArticleFactory)
+    configuration = factory.SubFactory(ConfigurationFactory)
 
 
 class AddressFactory(factory.django.DjangoModelFactory):

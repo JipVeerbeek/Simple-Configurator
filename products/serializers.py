@@ -10,10 +10,10 @@ class ProductSerializer(serializers.ModelSerializer):
 class ProductQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductQuestion
-        fields = ['id', 'product_id', 'question_id']
+        fields = ['id', 'product', 'question']
 
 
 class ProductQuestionArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductQuestionArticle
-        fields = ['id', 'product_question_id', 'article_id', 'price']
+        fields = ['id', 'product_question', 'article', 'price']

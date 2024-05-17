@@ -15,14 +15,14 @@ class ProductQuestionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.ProductQuestion
 
-    product_id = factory.SubFactory(ProductFactory)
-    question_id = factory.SubFactory(QuestionFactory)
+    product = factory.SubFactory(ProductFactory)
+    question = factory.SubFactory(QuestionFactory)
 
 
 class ProductQuestionArticleFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.ProductQuestionArticle
 
-    product_question_id = factory.SubFactory(ProductQuestionFactory)
-    article_id = factory.SubFactory(ArticleFactory)
+    product_question = factory.SubFactory(ProductQuestionFactory)
+    article = factory.SubFactory(ArticleFactory)
     price = factory.Faker('random_int', min=0, max=99)

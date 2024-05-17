@@ -11,8 +11,8 @@ class Product(models.Model):
     
 
 class ProductQuestion(models.Model):
-    product_id = models.ForeignKey('Product', on_delete=models.CASCADE)
-    question_id = models.ForeignKey('questions.Question', on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    question = models.ForeignKey('questions.Question', on_delete=models.CASCADE)
 
     def __str__(self):
         id = str(self.id)
@@ -20,8 +20,8 @@ class ProductQuestion(models.Model):
 
 
 class ProductQuestionArticle(models.Model):
-    product_question_id = models.ForeignKey('ProductQuestion', on_delete=models.CASCADE)
-    article_id = models.ForeignKey('articles.Article', on_delete=models.CASCADE)
+    product_question = models.ForeignKey('ProductQuestion', on_delete=models.CASCADE)
+    article = models.ForeignKey('articles.Article', on_delete=models.CASCADE)
     price = models.IntegerField()
 
     def __str__(self):

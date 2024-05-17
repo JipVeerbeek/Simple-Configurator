@@ -13,13 +13,13 @@ class QuestionListView(generics.ListAPIView):
         configuration_id = self.kwargs.get('configuration_id')
         configuration = Configuration.objects.get(id=configuration_id)
 
-        product_question = ProductQuestion.objects.filter(product_id=configuration.product_id)
+        product_question = ProductQuestion.objects.filter(product=configuration.product)
         serializer = ProductQuestionSerializer(product_question, many=True)
 
         queryset = []
 
         for item in serializer.data:
-            question_id = item['question_id']
+            question_id = item['question']
             question = Question.objects.get(id=question_id)
             queryset.append(question)
 

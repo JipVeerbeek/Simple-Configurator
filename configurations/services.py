@@ -23,14 +23,14 @@ class PriceService:
         self.configuration = configuration
 
     def get_order_lines(self):
-        return ConfigurationLine.objects.filter(configuration_id=self.configuration)
+        return ConfigurationLine.objects.filter(configuration=self.configuration)
     
     def calculate_order_price(self):
         lines = self.get_order_lines()
         price = 0
 
         for line in lines:
-            product_question_article = ProductQuestionArticle.objects.get(id=line.product_question_article_id.id)
+            product_question_article = ProductQuestionArticle.objects.get(id=line.product_question_article.id)
             price = price + product_question_article.price
 
         # todo: no need for response here, it's a service not a(n) (api)view

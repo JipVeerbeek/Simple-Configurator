@@ -7,11 +7,11 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class ProductQuestionAdmin(admin.ModelAdmin):
-    list_display = ["id", "product_id", "question_id"]
+    list_display = ["id", "product", "question"]
 
 
 class ProductQuestionArticleAdmin(admin.ModelAdmin):
-    list_display = ["id", "product_question_id", "article_id", "price"]
+    list_display = ["id", "product_question", "article", "price"]
 
 
 admin.site.register(Product, ProductAdmin)
