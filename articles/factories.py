@@ -6,6 +6,6 @@ from . import models
 class ArticleFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Article
-        # todo: django_get_or_create on 'name' to prevent duplicates
+        django_get_or_create = ['name']
 
     name = factory.Faker('word')

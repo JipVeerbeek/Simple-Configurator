@@ -1,5 +1,6 @@
 from django.urls import reverse
 from rest_framework import status
+from django.test import TestCase
 from rest_framework.test import APITestCase
 from products.models import Product
 from products.serializers import ProductSerializer
@@ -21,6 +22,7 @@ class ProductTests(APITestCase):
         self.assertEqual(response.data[0]['name'], 'Product 1')
         self.assertEqual(response.data[1]['name'], 'Product 2')
 
+class ProductSerializerTests(TestCase):
     def test_serializer(self):
         expected_data = [{'id': 1, 'name': 'Product 1'}, {'id': 2, 'name': 'Product 2'}]
 

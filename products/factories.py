@@ -6,7 +6,8 @@ from articles.factories import ArticleFactory
 class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Product
-
+        django_get_or_create = ['name']
+        
     name = factory.Faker('word')
 
 
