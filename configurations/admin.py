@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Configuration, Address, ConfigurationLine
+
+from .models import Address, Configuration, ConfigurationLine
 
 
 class ConfigurationAdmin(admin.ModelAdmin):

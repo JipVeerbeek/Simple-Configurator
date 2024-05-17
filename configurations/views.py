@@ -1,6 +1,7 @@
 from rest_framework import generics, views
+
 from .models import Configuration, ConfigurationLine
-from .serializers import ConfigurationSerializer, ConfigurationLineSerializer
+from .serializers import ConfigurationLineSerializer, ConfigurationSerializer
 from .services import PriceService
 
 

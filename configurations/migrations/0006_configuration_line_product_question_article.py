@@ -7,14 +7,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('configurations', '0005_alter_adress_middle_name_configuration_line'),
-        ('products', '0006_product_question_article'),
+        ("configurations", "0005_alter_adress_middle_name_configuration_line"),
+        ("products", "0006_product_question_article"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='configuration_line',
-            name='product_question_article',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product_question_article'),
+            model_name="configuration_line",
+            name="product_question_article",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="products.product_question_article",
+            ),
         ),
     ]

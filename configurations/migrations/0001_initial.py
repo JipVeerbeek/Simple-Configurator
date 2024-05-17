@@ -9,29 +9,57 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('products', '0005_alter_product_question_product_id'),
+        ("products", "0005_alter_product_question_product_id"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Adress',
+            name="Adress",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=100)),
-                ('middle_name', models.CharField(max_length=100, null=True)),
-                ('second_name', models.CharField(max_length=100)),
-                ('adress', models.CharField(max_length=100)),
-                ('city', models.CharField(max_length=100)),
-                ('postal_code', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=100)),
+                ("middle_name", models.CharField(max_length=100, null=True)),
+                ("second_name", models.CharField(max_length=100)),
+                ("adress", models.CharField(max_length=100)),
+                ("city", models.CharField(max_length=100)),
+                ("postal_code", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='Configuration',
+            name="Configuration",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('status', models.CharField(default='draft', max_length=100)),
-                ('adress_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='configurations.adress')),
-                ('product_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("status", models.CharField(default="draft", max_length=100)),
+                (
+                    "adress_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="configurations.adress",
+                    ),
+                ),
+                (
+                    "product_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.product",
+                    ),
+                ),
             ],
         ),
     ]

@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('configurations', '0010_rename_adress_address_alter_address_options_and_more'),
+        ("configurations", "0010_rename_adress_address_alter_address_options_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='address',
-            name='postal_code',
+            model_name="address",
+            name="postal_code",
         ),
     ]

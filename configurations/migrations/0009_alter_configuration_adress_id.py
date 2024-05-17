@@ -7,13 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('configurations', '0008_rename_configuration_line_configurationline'),
+        ("configurations", "0008_rename_configuration_line_configurationline"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='configuration',
-            name='adress_id',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='configurations.adress'),
+            model_name="configuration",
+            name="adress_id",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="configurations.adress",
+            ),
         ),
     ]

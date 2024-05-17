@@ -1,16 +1,18 @@
 from rest_framework import generics
-from .models import Question
-from products.models import ProductQuestion
-from .serializers import QuestionSerializer
-from products.serializers import ProductQuestionSerializer
+
 from configurations.models import Configuration
+from products.models import ProductQuestion
+from products.serializers import ProductQuestionSerializer
+
+from .models import Question
+from .serializers import QuestionSerializer
 
 
 class QuestionListView(generics.ListAPIView):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
-        configuration_id = self.kwargs.get('configuration_id')
+        configuration_id = self.kwargs.get("configuration_id")
         configuration = Configuration.objects.get(id=configuration_id)
 
         product_question = ProductQuestion.objects.filter(product=configuration.product)
@@ -19,7 +21,7 @@ class QuestionListView(generics.ListAPIView):
         queryset = []
 
         for item in serializer.data:
-            question_id = item['question']
+            question_id = item["question"]
             question = Question.objects.get(id=question_id)
             queryset.append(question)
 

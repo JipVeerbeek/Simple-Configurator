@@ -1,9 +1,14 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+
 from configurations.factories import ConfigurationFactory, ConfigurationLineFactory
+from products.factories import (
+    ProductFactory,
+    ProductQuestionArticleFactory,
+    ProductQuestionFactory,
+)
 from questions.factories import QuestionFactory
-from products.factories import ProductFactory, ProductQuestionFactory, ProductQuestionArticleFactory
 
 
 class ArticleTests(APITestCase):
@@ -11,21 +16,21 @@ class ArticleTests(APITestCase):
         product = ProductFactory()
         question = QuestionFactory()
         product_question = ProductQuestionFactory(
-            product_id = product,
-            question_id = question
+            product_id=product, question_id=question
         )
-        configuration = ConfigurationFactory(
-            product_id = product
-        )
+        configuration = ConfigurationFactory(product_id=product)
         product_question_article = ProductQuestionArticleFactory(
-            product_question_id = product_question
+            product_question_id=product_question
         )
         ConfigurationLineFactory(
-            product_question_article_id = product_question_article,
-            configuration_id = configuration
+            product_question_article_id=product_question_article,
+            configuration_id=configuration,
         )
 
-        url = reverse('ArticleListView', kwargs={'configuration_id': configuration.id, 'question_id': question.id})
+        url = reverse(
+            "ArticleListView",
+            kwargs={"configuration_id": configuration.id, "question_id": question.id},
+        )
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

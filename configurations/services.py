@@ -1,7 +1,8 @@
-from .models import ConfigurationLine
-from products.models import ProductQuestionArticle
 from rest_framework.response import Response
 
+from products.models import ProductQuestionArticle
+
+from .models import ConfigurationLine
 
 # Todo: create unit test for PriceService. Unit tests test isolated parts of a
 #       service or function.
@@ -18,21 +19,23 @@ from rest_framework.response import Response
 #         price = Price(...).get_order_price()
 #         # check price is equal to expected price
 
+
 class PriceService:
     def __init__(self, configuration):
         self.configuration = configuration
 
     def get_order_lines(self):
         return ConfigurationLine.objects.filter(configuration=self.configuration)
-    
+
     def calculate_order_price(self):
         lines = self.get_order_lines()
         price = 0
 
         for line in lines:
-            product_question_article = ProductQuestionArticle.objects.get(id=line.product_question_article.id)
+            product_question_article = ProductQuestionArticle.objects.get(
+                id=line.product_question_article.id
+            )
             price = price + product_question_article.price
 
         # todo: no need for response here, it's a service not a(n) (api)view
         return Response(price)
-
