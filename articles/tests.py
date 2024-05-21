@@ -37,7 +37,3 @@ class ArticleTests(TransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-
-        # todo: Lines are a little long. Can you configure your IDE to use max length
-        #       120 line length and apply it throughout your code? Very useful for split
-        #       screen.

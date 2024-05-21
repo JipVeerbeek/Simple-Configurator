@@ -19,3 +19,7 @@ class PriceService:
             price = price + product_question_article.price
 
         return price
+
+
+class DiscountPriceService(PriceService):
+    pass

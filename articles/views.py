@@ -1,11 +1,9 @@
 from rest_framework import generics
-
+from rest_framework.response import Response
 from configurations.models import Configuration
+from articles.models import Article
 from products.models import ProductQuestion, ProductQuestionArticle
-from products.serializers import (
-    ProductQuestionArticleSerializer,
-    ProductQuestionSerializer,
-)
+from articles.serializers import ArticleSerializer
 
 from .models import Article
 from .serializers import ArticleSerializer
@@ -13,27 +11,18 @@ from .serializers import ArticleSerializer
 
 class ArticleListView(generics.ListAPIView):
     serializer_class = ArticleSerializer
+    queryset = Article.objects.all()
 
-    def get_queryset(self):
-        # todo: get_queryset is only used for fetching the BASE queryset. You
-        #       are doing way to much here. Move related logic to `get`.
-        configuration_id = self.kwargs.get("configuration_id")
-        question_id = self.kwargs.get("question_id")
+    def get(self, request, configuration_id, question_id, *args, **kwargs):
         configuration = Configuration.objects.get(id=configuration_id)
-
         product_question = ProductQuestion.objects.get(product=configuration.product, question=question_id)
-        product_question_serializer = ProductQuestionSerializer(product_question)
-        product_question_id = product_question_serializer.data["id"]
 
-        product_question_article = ProductQuestionArticle.objects.filter(product_question=product_question_id)
-        product_question_article_serializer = ProductQuestionArticleSerializer(product_question_article, many=True)
+        product_question_articles = ProductQuestionArticle.objects.filter(
+            product_question=product_question
+        ).values_list("article__id", flat=True)
 
-        queryset = []
+        articles = Article.objects.filter(id__in=product_question_articles)
+        serializer = ArticleSerializer(data=articles, many=True)
+        serializer.is_valid()
 
-        for item in product_question_article_serializer.data:
-            article_id = item["article"]
-
-            article = Article.objects.get(id=article_id)
-            queryset.append(article)
-
-        return queryset
+        return Response(serializer.data)
