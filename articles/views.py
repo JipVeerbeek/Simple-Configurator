@@ -21,18 +21,12 @@ class ArticleListView(generics.ListAPIView):
         question_id = self.kwargs.get("question_id")
         configuration = Configuration.objects.get(id=configuration_id)
 
-        product_question = ProductQuestion.objects.get(
-            product=configuration.product, question=question_id
-        )
+        product_question = ProductQuestion.objects.get(product=configuration.product, question=question_id)
         product_question_serializer = ProductQuestionSerializer(product_question)
         product_question_id = product_question_serializer.data["id"]
 
-        product_question_article = ProductQuestionArticle.objects.filter(
-            product_question=product_question_id
-        )
-        product_question_article_serializer = ProductQuestionArticleSerializer(
-            product_question_article, many=True
-        )
+        product_question_article = ProductQuestionArticle.objects.filter(product_question=product_question_id)
+        product_question_article_serializer = ProductQuestionArticleSerializer(product_question_article, many=True)
 
         queryset = []
 

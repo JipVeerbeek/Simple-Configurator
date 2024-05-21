@@ -3,9 +3,7 @@ from django.db import models
 
 class Configuration(models.Model):
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
-    address = models.ForeignKey(
-        "Address", on_delete=models.CASCADE, blank=True, null=True
-    )
+    address = models.ForeignKey("Address", on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(max_length=100, default="draft")
 
     def __str__(self):
@@ -14,9 +12,7 @@ class Configuration(models.Model):
 
 
 class ConfigurationLine(models.Model):
-    product_question_article = models.ForeignKey(
-        "products.ProductQuestionArticle", on_delete=models.CASCADE
-    )
+    product_question_article = models.ForeignKey("products.ProductQuestionArticle", on_delete=models.CASCADE)
     configuration = models.ForeignKey("Configuration", on_delete=models.CASCADE)
 
 

@@ -21,7 +21,10 @@ class ProductTests(TransactionTestCase):
 
 class ProductSerializerTests(TestCase):
     def test_serializer(self):
-        expected_data = [{"id": 1, "name": "Product 1"}, {"id": 2, "name": "Product 2"}]
+        expected_data = [
+            {"id": 1, "name": "Product 1"},
+            {"id": 2, "name": "Product 2"},
+        ]
 
         Product.objects.create(name="Product 1")
         Product.objects.create(name="Product 2")

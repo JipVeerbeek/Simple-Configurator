@@ -1,4 +1,5 @@
 from rest_framework import generics, views
+from rest_framework.response import Response
 
 from .models import Configuration, ConfigurationLine
 from .serializers import ConfigurationLineSerializer, ConfigurationSerializer
@@ -17,8 +18,6 @@ class AnswerCreateView(generics.CreateAPIView):
 
 class PriceListView(views.APIView):
     def get(self, request, configuration_id, *args, **kwargs):
-        # todo: where is the old price? ;)
-        #       price_service = PriceService(..)
-        #       return price_service.calculate_order_price()
-        new_price = PriceService(configuration=configuration_id).calculate_order_price()
-        return new_price
+        price_service = PriceService(configuration=configuration_id)
+        price = price_service.calculate_order_price()
+        return Response(price)

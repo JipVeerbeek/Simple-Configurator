@@ -1,18 +1,25 @@
 from django.urls import reverse
 from rest_framework import status
 from django.test import TransactionTestCase
-from articles.models import Article
-from configurations.factories import ConfigurationFactory, ConfigurationLineFactory, AddressFactory
-from configurations.models import Address, Configuration, ConfigurationLine
-from products.factories import ProductFactory, ProductQuestionFactory, ProductQuestionArticleFactory
-from questions.factories import QuestionFactory
+from configurations.factories import (
+    ConfigurationFactory,
+    ConfigurationLineFactory,
+    AddressFactory,
+)
+from configurations.models import Configuration
+from products.factories import (
+    ProductFactory,
+    ProductQuestionFactory,
+    ProductQuestionArticleFactory,
+)
+from configurations.services import PriceService
 
 
 class ConfigurationTests(TransactionTestCase):
     def test_create_configuration(self):
         product = ProductFactory()
         address = AddressFactory()
-        
+
         url = reverse("ConfigurationCreateView")
 
         data1 = {"product": product.id, "address": address.id}
@@ -30,14 +37,10 @@ class ConfigurationTests(TransactionTestCase):
         product = ProductFactory()
         configuration = ConfigurationFactory(product=product)
         product_question = ProductQuestionFactory(product=product)
-        product_question_article = ProductQuestionArticleFactory(
-            product_question=product_question
-        )
+        product_question_article = ProductQuestionArticleFactory(product_question=product_question)
 
         url = reverse("AnswerCreateView")
 
-        # todo: if you don't test a quantity response result, then just testing a
-        #       single create action is sufficient
         data = {
             "product_question_article": product_question_article.id,
             "configuration": configuration.id,
@@ -47,20 +50,22 @@ class ConfigurationTests(TransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_get_price_service(self):
-        product = ProductFactory()
-        product_question = ProductQuestionFactory(product=product)
-        configuration = ConfigurationFactory(product=product)
-        product_question_article = ProductQuestionArticleFactory(
-            product_question=product_question
-        )
-        ConfigurationLineFactory(
-            product_question_article=product_question_article,
-            configuration=configuration,
-        )
-        url = reverse("PriceListView", kwargs={"configuration_id": configuration.id})
 
+class PriceServiceTestCase(TransactionTestCase):
+    def setUp(self):
+        self.configuration = ConfigurationFactory()
+        self.lines = ConfigurationLineFactory.create_batch(3, configuration=self.configuration)
+
+    def test_get_order_lines(self):
+        lines = PriceService(self.configuration).get_order_lines()
+        self.assertEqual(len(lines), 3)
+
+    def test_calculate_order_price(self):
+        price = PriceService(self.configuration).calculate_order_price()
+        self.assertIsInstance(price, int)
+
+    def test_get_price(self):
+        url = reverse("PriceListView", kwargs={"configuration_id": self.configuration.id})
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        # self.assertEqual(response.data, 300)

@@ -9,10 +9,7 @@ from configurations.factories import ConfigurationFactory
 class QuestionTests(TransactionTestCase):
     def test_get_questions(self):
         product = ProductFactory()
-        ProductQuestionFactory.create_batch(
-            2,
-            product=product
-        )
+        ProductQuestionFactory.create_batch(2, product=product)
         configuration = ConfigurationFactory(product=product)
 
         url = reverse("QuestionListView", kwargs={"configuration_id": configuration.id})
