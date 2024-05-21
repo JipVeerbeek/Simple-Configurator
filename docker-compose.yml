@@ -1,10 +1,14 @@
+version: '3.8'
+
 services:
   db:
-    image: postgres
+    image: postgres:latest
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: simple_configurator
+    ports:
+      - "5432:5432"
 
   web:
     build: .
