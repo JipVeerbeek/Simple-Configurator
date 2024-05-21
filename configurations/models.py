@@ -2,8 +2,6 @@ from django.db import models
 
 
 class Configuration(models.Model):
-    # todo: just use product and address as field name (convention).
-    #       do this for all models
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
     address = models.ForeignKey(
         "Address", on_delete=models.CASCADE, blank=True, null=True

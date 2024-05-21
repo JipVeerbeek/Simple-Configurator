@@ -1,6 +1,6 @@
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
+from django.test import TransactionTestCase
 
 from configurations.factories import ConfigurationFactory, ConfigurationLineFactory
 from products.factories import (
@@ -11,20 +11,20 @@ from products.factories import (
 from questions.factories import QuestionFactory
 
 
-class ArticleTests(APITestCase):
+class ArticleTests(TransactionTestCase):
     def test_get_articles(self):
         product = ProductFactory()
         question = QuestionFactory()
         product_question = ProductQuestionFactory(
-            product_id=product, question_id=question
+            product=product, question=question
         )
-        configuration = ConfigurationFactory(product_id=product)
+        configuration = ConfigurationFactory(product=product)
         product_question_article = ProductQuestionArticleFactory(
-            product_question_id=product_question
+            product_question=product_question
         )
         ConfigurationLineFactory(
-            product_question_article_id=product_question_article,
-            configuration_id=configuration,
+            product_question_article=product_question_article,
+            configuration=configuration,
         )
 
         url = reverse(

@@ -1,25 +1,21 @@
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
+from django.test import TransactionTestCase
 
-from configurations.models import Configuration
-from products.models import Product, ProductQuestion
-
-from .models import Question
+from products.factories import ProductFactory, ProductQuestionFactory
+from configurations.factories import ConfigurationFactory
 
 
-class ArticleTests(APITestCase):
-    def test_get_articles(self):
+class QuestionTests(TransactionTestCase):
+    def test_get_questions(self):
+        product = ProductFactory()
+        ProductQuestionFactory.create_batch(
+            2,
+            product=product
+        )
+        configuration = ConfigurationFactory(product=product)
 
-        product = Product.objects.create(name="Product")
-        configuration = Configuration.objects.create(product=product)
-        question = Question.objects.create(name="Question")
-        second_question = Question.objects.create(name="Question2")
-
-        url = reverse("QuestionListView", kwargs={"configuration": configuration.id})
-
-        ProductQuestion.objects.create(product=product, question=question)
-        ProductQuestion.objects.create(product=product, question=second_question)
+        url = reverse("QuestionListView", kwargs={"configuration_id": configuration.id})
 
         response = self.client.get(url)
 
