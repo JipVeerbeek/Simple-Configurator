@@ -7,8 +7,8 @@ from . import models
 
 fake = Faker()
 
-# number = fake.random_int(min=1000, max=9999)
-# letters = fake.random_uppercase_letter() + fake.random_uppercase_letter()
+number = fake.random_int(min=1000, max=9999)
+letters = fake.random_uppercase_letter() + fake.random_uppercase_letter()
 
 
 class ConfigurationFactory(factory.django.DjangoModelFactory):
@@ -38,5 +38,5 @@ class AddressFactory(factory.django.DjangoModelFactory):
     middle_name = factory.LazyAttribute(lambda o: fake.name() if fake.boolean() else None)
     last_name = factory.Faker("last_name")
     address = factory.Faker("address")
-    # postal_code = f"{number}{letters}"
+    postal_code = f"{number}{letters}"
     city = factory.Faker("city")

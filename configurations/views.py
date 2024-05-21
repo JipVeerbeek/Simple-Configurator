@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from .models import Configuration, ConfigurationLine
 from .serializers import ConfigurationLineSerializer, ConfigurationSerializer
-from .services import PriceService, DiscountPriceService
+from .services import DiscountPriceService
 
 
 class ConfigurationCreateView(generics.CreateAPIView):
@@ -18,7 +18,6 @@ class AnswerCreateView(generics.CreateAPIView):
 
 class PriceListView(views.APIView):
     def get(self, request, configuration_id, *args, **kwargs):
-        price_service = PriceService(configuration=configuration_id)
-        # DiscountPriceService(configuration=configuration_id).calculate_order_price()
-        price = price_service.calculate_order_price()
+        discount_price_service = DiscountPriceService(configuration_id=configuration_id)
+        price = discount_price_service.calculate_order_price()
         return Response(price)

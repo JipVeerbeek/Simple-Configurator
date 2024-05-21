@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-uxhq-+w+of3i5w(6!obk)yhed=-$e=+se86&ra(9(ff7yr_-bh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -90,6 +90,10 @@ DATABASES = {
         "HOST": "db",
         "PORT": "5432",
     }
+    # "default": {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 
