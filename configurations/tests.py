@@ -12,7 +12,7 @@ from products.factories import (
     ProductQuestionFactory,
     ProductQuestionArticleFactory,
 )
-from configurations.services import PriceService
+from configurations.services import PriceService, DiscountPriceService
 
 
 class ConfigurationTests(TransactionTestCase):
@@ -57,11 +57,11 @@ class PriceServiceTestCase(TransactionTestCase):
         self.lines = ConfigurationLineFactory.create_batch(3, configuration=self.configuration)
 
     def test_get_order_lines(self):
-        lines = PriceService(self.configuration).get_order_lines()
+        lines = PriceService(self.configuration.id).get_order_lines()
         self.assertEqual(len(lines), 3)
 
     def test_calculate_order_price(self):
-        price = PriceService(self.configuration).calculate_order_price()
+        price = PriceService(self.configuration.id).calculate_order_price()
         self.assertIsInstance(price, int)
 
     def test_get_price(self):
@@ -69,3 +69,10 @@ class PriceServiceTestCase(TransactionTestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_discounted_price(self):
+        price = DiscountPriceService(self.configuration.id).calculate_discounted_price(order_price=30)
+        price = int(price)
+
+        self.assertEqual(price, 27)
+        self.assertIsInstance(price, int)

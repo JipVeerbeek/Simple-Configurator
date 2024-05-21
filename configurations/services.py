@@ -8,6 +8,11 @@ class PriceService:
 
     def get_configuration(self, configuration_id):
         return Configuration.objects.get(id=configuration_id)
+    
+    def get_address(self):
+        if not self.configuration.address:
+            return None
+        return self.configuration.address
 
     def get_order_lines(self):
         return ConfigurationLine.objects.filter(configuration=self.configuration)
@@ -29,7 +34,13 @@ class DiscountPriceService(PriceService):
         return discounted_price
 
     def calculate_order_price(self):
-        postal_code = self.configuration.address.postal_code
+        address = self.get_address()
+        if not address:
+            postal_code = '0000AA'
+            # You can build a function to handle this situation here, maybe a signup.
+        else:
+            postal_code = address.postal_code
+
         code = postal_code[:4]
         code = int(code)
         order_price = super().calculate_order_price()
