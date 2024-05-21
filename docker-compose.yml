@@ -5,6 +5,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: simple_configurator
+    ports:
+      - "5432:5432"
 
   web:
     build: .

@@ -7,13 +7,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('products', '0004_alter_product_question_product_id_and_more'),
+        ("products", "0004_alter_product_question_product_id_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='product_question',
-            name='product_id',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product'),
+            model_name="product_question",
+            name="product_id",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="products.product",
+            ),
         ),
     ]

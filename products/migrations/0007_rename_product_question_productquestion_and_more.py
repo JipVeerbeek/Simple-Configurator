@@ -6,19 +6,19 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('articles', '0001_initial'),
-        ('configurations', '0008_rename_configuration_line_configurationline'),
-        ('products', '0006_product_question_article'),
-        ('questions', '0001_initial'),
+        ("articles", "0001_initial"),
+        ("configurations", "0008_rename_configuration_line_configurationline"),
+        ("products", "0006_product_question_article"),
+        ("questions", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Product_Question',
-            new_name='ProductQuestion',
+            old_name="Product_Question",
+            new_name="ProductQuestion",
         ),
         migrations.RenameModel(
-            old_name='Product_question_article',
-            new_name='ProductQuestionArticle',
+            old_name="Product_question_article",
+            new_name="ProductQuestionArticle",
         ),
     ]

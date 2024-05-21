@@ -1,17 +1,25 @@
 from django.contrib import admin
-from .models import Configuration, Address, ConfigurationLine
+
+from .models import Address, Configuration, ConfigurationLine
 
 
 class ConfigurationAdmin(admin.ModelAdmin):
-    list_display = ["id", "address_id", "product_id", "status"]
+    list_display = ["id", "address", "product", "status"]
 
 
 class ConfigurationLineAdmin(admin.ModelAdmin):
-    list_display = ["id", "product_question_article_id", "configuration_id"]
+    list_display = ["id", "product_question_article", "configuration"]
 
 
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ["id", "first_name", "middle_name", "last_name", "address", "city"]
+    list_display = [
+        "id",
+        "first_name",
+        "middle_name",
+        "last_name",
+        "address",
+        "city",
+    ]
 
 
 admin.site.register(Configuration, ConfigurationAdmin)

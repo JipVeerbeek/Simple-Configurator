@@ -1,44 +1,28 @@
 from rest_framework import generics
-from .models import Article
-from products.models import ProductQuestion, ProductQuestionArticle
-from .serializers import ArticleSerializer
-from products.serializers import ProductQuestionSerializer, ProductQuestionArticleSerializer
+from rest_framework.response import Response
 from configurations.models import Configuration
+from articles.models import Article
+from products.models import ProductQuestion, ProductQuestionArticle
+from articles.serializers import ArticleSerializer
+
+from .models import Article
+from .serializers import ArticleSerializer
 
 
 class ArticleListView(generics.ListAPIView):
     serializer_class = ArticleSerializer
+    queryset = Article.objects.all()
 
-    def get_queryset(self):
-        #haalt ids op uit url
-        configuration_id = self.kwargs.get('configuration_id')
-        question_id = self.kwargs.get('question_id')
-
-        #configuration ophalen
+    def get(self, request, configuration_id, question_id, *args, **kwargs):
         configuration = Configuration.objects.get(id=configuration_id)
+        product_question = ProductQuestion.objects.get(product=configuration.product, question=question_id)
 
-        #haalt product question op waar je de articles van gaat krijgen
-        product_question = ProductQuestion.objects.get(product_id=configuration.product_id, question_id=question_id)
-        #serialize
-        product_question_serializer = ProductQuestionSerializer(product_question)
-        #pakt prod question id
-        product_question_id = product_question_serializer.data['id']
+        product_question_articles = ProductQuestionArticle.objects.filter(
+            product_question=product_question
+        ).values_list("article__id", flat=True)
 
-        #haalt product question article(s) op
-        product_question_article = ProductQuestionArticle.objects.filter(product_question_id=product_question_id)
-        #serialize
-        product_question_article_serializer = ProductQuestionArticleSerializer(product_question_article, many=True)
+        articles = Article.objects.filter(id__in=product_question_articles)
+        serializer = ArticleSerializer(data=articles, many=True)
+        serializer.is_valid()
 
-        #array waar articles in komen
-        queryset = []
-
-        #loop door de product question article(s)
-        for item in product_question_article_serializer.data:
-            article_id = item['article_id']
-
-            #haalt de article(s) op op basis van id
-            article = Article.objects.get(id=article_id)
-            #pusht naar array
-            queryset.append(article)
-
-        return queryset
+        return Response(serializer.data)

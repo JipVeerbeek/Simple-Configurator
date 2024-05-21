@@ -7,18 +7,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('articles', '0001_initial'),
-        ('products', '0005_alter_product_question_product_id'),
+        ("articles", "0001_initial"),
+        ("products", "0005_alter_product_question_product_id"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Product_question_article',
+            name="Product_question_article",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('price', models.IntegerField()),
-                ('article_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='articles.article')),
-                ('product_question_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='products.product_question')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("price", models.IntegerField()),
+                (
+                    "article_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="articles.article",
+                    ),
+                ),
+                (
+                    "product_question_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="products.product_question",
+                    ),
+                ),
             ],
         ),
     ]

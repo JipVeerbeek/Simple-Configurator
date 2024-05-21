@@ -7,20 +7,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('configurations', '0004_alter_adress_options'),
+        ("configurations", "0004_alter_adress_options"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='adress',
-            name='middle_name',
+            model_name="adress",
+            name="middle_name",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.CreateModel(
-            name='Configuration_line',
+            name="Configuration_line",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('configuration_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='configurations.configuration')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "configuration_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="configurations.configuration",
+                    ),
+                ),
             ],
         ),
     ]
