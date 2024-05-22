@@ -8,7 +8,7 @@ class PriceService:
 
     def get_configuration(self, configuration_id):
         return Configuration.objects.get(id=configuration_id)
-    
+
     def get_address(self):
         if not self.configuration.address:
             return None
@@ -29,7 +29,7 @@ class PriceService:
 
 class DiscountPriceService(PriceService):
     def calculate_discounted_price(self, **kwargs):
-        order_price = kwargs['order_price']
+        order_price = kwargs["order_price"]
         discounted_price = order_price * 0.9
         return discounted_price
 
@@ -38,8 +38,7 @@ class DiscountPriceService(PriceService):
         price = super().calculate_order_price()
 
         if not address:
-            # You can build a function to handle this situation here, maybe a signup.
-            return price
+            return price  ### You can build a function to handle this situation here, maybe a signup.
         else:
             postal_code = address.postal_code
 
