@@ -13,9 +13,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name="address",
-            name="postal_code",
-            field=models.CharField(max_length=100)
-        ),
+        migrations.AddField(model_name="address", name="postal_code", field=models.CharField(max_length=100)),
     ]

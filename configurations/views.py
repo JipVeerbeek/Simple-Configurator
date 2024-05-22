@@ -1,9 +1,10 @@
 from rest_framework import generics, views
 from rest_framework.response import Response
+from django.utils.module_loading import import_string
+from django.conf import settings
 
 from .models import Configuration, ConfigurationLine
 from .serializers import ConfigurationLineSerializer, ConfigurationSerializer
-from .services import DiscountPriceService
 
 
 class ConfigurationCreateView(generics.CreateAPIView):
@@ -18,6 +19,11 @@ class AnswerCreateView(generics.CreateAPIView):
 
 class PriceListView(views.APIView):
     def get(self, request, configuration_id, *args, **kwargs):
-        discount_price_service = DiscountPriceService(configuration_id=configuration_id)
-        price = discount_price_service.calculate_order_price()
+        PriceService = self.get_price_service()(configuration_id=configuration_id)
+        price = PriceService.calculate_order_price()
         return Response(price)
+
+    def get_price_service(self):
+        price_service_path = settings.PRICE_SERVICE
+        PriceServiceClass = import_string(price_service_path)
+        return PriceServiceClass

@@ -50,6 +50,20 @@ class ConfigurationTests(TransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_get_price_view(self):
+        configuration = ConfigurationFactory()
+        ConfigurationLineFactory.create_batch(
+            3,
+            configuration=configuration,
+        )
+
+        url = reverse("PriceListView", kwargs={"configuration_id": configuration.id})
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIsInstance(response.data, int)
+
 
 class PriceServiceTestCase(TransactionTestCase):
     def setUp(self):
@@ -70,7 +84,7 @@ class PriceServiceTestCase(TransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_discounted_price(self):
+    def test_get_discounted_price(self):
         price = DiscountPriceService(self.configuration.id).calculate_discounted_price(order_price=30)
         price = int(price)
 
