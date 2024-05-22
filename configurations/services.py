@@ -35,17 +35,18 @@ class DiscountPriceService(PriceService):
 
     def calculate_order_price(self):
         address = self.get_address()
+        price = super().calculate_order_price()
+
         if not address:
-            postal_code = '0000AA'
             # You can build a function to handle this situation here, maybe a signup.
+            return price
         else:
             postal_code = address.postal_code
 
         code = postal_code[:4]
         code = int(code)
-        order_price = super().calculate_order_price()
 
         if code in range(8000, 8999):
-            return self.calculate_discounted_price(order_price=order_price)
+            return self.calculate_discounted_price(order_price=price)
         else:
-            return order_price
+            return price
