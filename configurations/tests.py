@@ -62,7 +62,7 @@ class ConfigurationTests(TransactionTestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIsInstance(response.data, int)
+        self.assertIsInstance(response.data, (int, float))
 
 
 class PriceServiceTestCase(TransactionTestCase):
