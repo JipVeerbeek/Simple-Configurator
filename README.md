@@ -2,7 +2,7 @@
 
 ### Clone this repo:
 
-`$ git@gitlab.com:intothesource/stageprojecten/simple-configurator.git`
+`$ https://github.com/JipVeerbeek/Simple-Configurator.git`
 
 ### Create .venv:
 
