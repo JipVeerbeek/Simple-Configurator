@@ -29,24 +29,29 @@
 ### Run Migrations:
 ***Initializes your database.***
 
-`docker compose exec web ./manage.py migrate`
+`$ docker compose exec web ./manage.py migrate`
 
 ### Load Fixtures:
 ***Adds dummydata to you database.***
 
-`docker compose exec web ./manage.py load_dynamic_fixtures`
+`$ docker compose exec web ./manage.py load_dynamic_fixtures`
 
-### Run Tests
+### Run Tests:
 ***Tests the endpoints.***
 
-`docker compose exec web ./manage.py test`
+`$ docker compose exec web ./manage.py test`
 
-### Swagger:
-***Allows you to try out endpoints***
+### Admin User:
+***Creates account for the admin dashboard.***
 
-`http://localhost:8000/api/swagger/`
+`$ docker compose exec web ./manage.py createsuperuser`
 
 ### Django Admin:
 ***The build in database viewer.***
 
 `http://localhost:8000/admin/`
+
+### Swagger:
+***Allows you to try out endpoints.***
+
+`http://localhost:8000/api/swagger/`
